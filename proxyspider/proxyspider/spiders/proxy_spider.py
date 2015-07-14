@@ -16,18 +16,14 @@ class ProxySpider(CrawlSpider):
         Rule(LinkExtractor(allow=('list_[0-5].htm', )),  callback='parse_item'),
             )
 
-    def parse_item(self, response):
+    def parse(self, response):
         items = []
-        for sel in response.xpath('//table/tbody/tr'):
+        for sel in response.xpath('//table/tr'):
             item = ProxyItem()
-            ip = sel.xpath('td[2]').extract().encode('utf-8')
-            port = sel.xpath('td[3]').extract().encode('utf-8')
-            item['record'] = "".join("http://", ip, ":", port);
-            print item['record']
-            items.append(item)
+            ip = sel.xpath('td[2]/text()').extract()
+            port = sel.xpath('td[3]/text()').extract()
+            if len(ip) > 0 and len(port) > 0:
+                item['record'] = "http://" + ip[0] + ":" + port[0]
+                items.append(item)
         return items
-
-    def _process_request(self, request):
-        info('process '  str(request))
-        return request
 
