@@ -7,22 +7,22 @@ class HospitalSpider(CrawlSpider):
     name = "hospital"
     allowed_domains = ["haodf.com"]
     start_urls = [#"http://www.haodf.com/yiyuan/zhejiang/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/chaoyang/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/haidian/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/xicheng/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/dongcheng/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/fengtai/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/shijingshan/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/daxing/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/changping/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/tongzhou/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/fangshan/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/huairou/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/yanqing/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/chaoyang/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/haidian/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/xicheng/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/dongcheng/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/fengtai/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/shijingshan/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/daxing/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/changping/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/tongzhou/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/fangshan/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/huairou/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/yanqing/list.htm",
                   "http://www.haodf.com/yiyuan/beijing/mentougou/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/shunyi/list.htm",
-                  #"http://www.haodf.com/yiyuan/beijing/pinggu/list.htm"
-                  #"http://www.haodf.com/yiyuan/beijing/list.htm"
+                  "http://www.haodf.com/yiyuan/beijing/shunyi/list.htm",
+                  "http://www.haodf.com/yiyuan/beijing/pinggu/list.htm"
+                  "http://www.haodf.com/yiyuan/beijing/list.htm"
                  ]
     rules = (
         Rule(LinkExtractor(allow=('/yiyuan/zhejiang/[a-z]+/list.htm', )),  callback='parse_item'),

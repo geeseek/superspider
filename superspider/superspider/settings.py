@@ -56,9 +56,9 @@ DOWNLOAD_DELAY = 0.25
 RETRY_TIMES = 10
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy.contrib.downloadermiddleware.retry.RetryMiddleware': 90,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
     'superspider.randomproxy.RandomProxy': 100,
-    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110
 }
 
 # Proxy list containing entries like
@@ -66,7 +66,7 @@ DOWNLOADER_MIDDLEWARES = {
 # http://username:password@host2:port
 # http://host3:port
 # ...
-PROXY_LIST = 'superspider/proxy_list.txt'
+PROXY_LIST = 'proxy_list.txt'
 
 
 # Enable or disable extensions
@@ -77,9 +77,9 @@ PROXY_LIST = 'superspider/proxy_list.txt'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'superspider.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'superspider.pipelines.Write2TxtPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
