@@ -78,7 +78,7 @@ PROXY_LIST = 'proxy_list.txt'
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'superspider.pipelines.Write2TxtPipeline': 300,
+    'superspider.pipelines.Write2MySQLStorePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
