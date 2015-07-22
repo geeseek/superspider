@@ -54,7 +54,7 @@ class Write2MySQLStorePipeline(object):
 
     def _conditional_insert(self, tx, item):
         if item.get('symptom'):
-            tx.execute('insert into spider_qa (department, hospital, doc_name, ask_time, symptom, symptoms_desc)  \
-            values (%s, %s, %s, %s, %s, %s)', (item['department'], item['hospital'], item['name'], item['time'], \
-            item['symptom'], item['symptoms_desc']))
+            tx.execute('insert into spider_qa (department, hospital, doc_name, ask_time, symptom, symptoms_desc,url)  \
+            values (%s, %s, %s, %s, %s, %s,%s)', (item['department'], item['hospital'], item['name'], item['time'], \
+            item['symptom'], item['symptoms_desc'], item['url']))
 

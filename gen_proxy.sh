@@ -1,6 +1,5 @@
 #/bin/bash
-cd proxyspider;
-scrapy crawl proxy;
-cp proxy_list.txt ../;
-cd -;
-cp proxy_list.txt superspider/;
+curl 'http://revx.daili666.com/ip/?tid=556617812511460&num=50' > proxy_list.txt;
+sed -i 's/^/http:\/\//g' proxy_list.txt;
+cp proxy_list.txt  superspider/proxy_list.txt;
+#cat proxy_list.txt >> superspider/proxy_list.txt;

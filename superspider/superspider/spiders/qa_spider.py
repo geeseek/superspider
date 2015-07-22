@@ -28,6 +28,7 @@ class QASpider(CrawlSpider):
         hospital = response.xpath('//div[@class="space_b_picright"]/div[2]/div/p/a[1]/text()').extract()
         department = response.xpath('//div[@class="space_b_picright"]/div[2]/div/p/a[2]/text()').extract()
         name = response.xpath('//h3[@class="doc_name f22 fl"]/text()').extract()
+        url = response.url;
 
         if (len(symptom) > 0 and len(symptoms_desc) and len(time) > 0 and len(hospital) > 0 
             and len(department) > 0 and len(name) > 0):
@@ -37,6 +38,7 @@ class QASpider(CrawlSpider):
             item['hospital'] = hospital[0].encode('utf-8').replace('\n',' ') 
             item['department'] = department[0].encode('utf-8').replace('\n',' ') 
             item['name'] = name[0].encode('utf-8').replace('\n',' ')  
+            item['url'] = url
         return item 
 
     def _process_request(self, request):  

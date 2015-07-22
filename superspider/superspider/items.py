@@ -17,6 +17,7 @@ class QAItem(scrapy.Item):
     hospital = scrapy.Field()
     department = scrapy.Field()
     name = scrapy.Field()
+    url = scrapy.Field()
 
 class HospitalItem(scrapy.Item):
     province = scrapy.Field()
