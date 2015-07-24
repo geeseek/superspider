@@ -14,7 +14,7 @@ BOT_NAME = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like 
 SPIDER_MODULES = ['superspider.spiders']
 NEWSPIDER_MODULE = 'superspider.spiders'
 
-#CLOSESPIDER_ERRORCOUNT = 20
+CLOSESPIDER_ERRORCOUNT = 50
 CLOSESPIDER_TIMEOUT = 600 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -58,9 +58,9 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 50
 RETRY_TIMES = 2 
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
 DOWNLOADER_MIDDLEWARES = {
-    #'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
     'superspider.randomproxy.RandomProxy': 100,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 120
 }
 
 # Proxy list containing entries like
