@@ -39,7 +39,7 @@ class Write2TxtPipeline(object):
 class Write2MySQLStorePipeline(object):
     def __init__(self):
         self.dbpool = adbapi.ConnectionPool('MySQLdb',
-            host = "10.1.1.86",
+            host = "123.56.148.41",
             db = 'hmengine',
             user = 'hmtest',
             passwd = 'hmtest',

@@ -30,6 +30,7 @@ class RandomProxy(object):
 
         self.proxies = {}
         for line in fin.readlines():
+            line = line.strip('\r')
             parts = re.match('(\w+://)(\w+:\w+@)?(.+)', line)
 
             # Cut trailing @
@@ -60,11 +61,13 @@ class RandomProxy(object):
             request.headers['Proxy-Authorization'] = basic_auth
 
     def process_exception(self, request, exception, spider):
-        #proxy = request.meta['proxy']
+        proxy = request.meta['proxy']
         #log.msg('Removing failed proxy <%s>, %d proxies left' % (
         #            proxy, len(self.proxies)))
-        #try:
-        #    del self.proxies[proxy]
-        #except ValueError:
-        #    pass
+        try:
+            if proxy in self.proxies.keys():
+                del self.proxies[proxy]
+                print "length of proxy list %" % len(self.proxies)
+        except ValueError:
+            pass
         pass
