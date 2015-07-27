@@ -6,14 +6,28 @@ from superspider.items import QAItem
 class QASpider(CrawlSpider):
     name = "qa"
     allowed_domains = ["haodf.com"]
-    start_urls = ["http://zixun.haodf.com/index/25.htm",
+    start_urls = ["http://zixun.haodf.com/index/13.htm",
+                  "http://zixun.haodf.com/index/14.htm",
+                  "http://zixun.haodf.com/index/15.htm",
+                  "http://zixun.haodf.com/index/16.htm",
+                  "http://zixun.haodf.com/index/17.htm",
+                  "http://zixun.haodf.com/index/18.htm",
+                  "http://zixun.haodf.com/index/19.htm",
+                  "http://zixun.haodf.com/index/20.htm",
+                  "http://zixun.haodf.com/index/21.htm",
+                  "http://zixun.haodf.com/index/22.htm",
+                  "http://zixun.haodf.com/index/23.htm",
+                  "http://zixun.haodf.com/index/24.htm",
+                  "http://zixun.haodf.com/index/25.htm",
                   "http://zixun.haodf.com/index/26.htm",
                   "http://zixun.haodf.com/index/27.htm",
                   "http://zixun.haodf.com/index/28.htm",
                   "http://zixun.haodf.com/index/29.htm",
                   "http://zixun.haodf.com/index/30.htm",
                   "http://zixun.haodf.com/index/31.htm",
-                  "http://zixun.haodf.com/index/32.htm"
+                  "http://zixun.haodf.com/index/32.htm",
+                  "http://zixun.haodf.com/index/33.htm",
+                  "http://zixun.haodf.com/index/34.htm"
                  ]
     rules = (
         Rule(LinkExtractor(allow=('/index/[0-9]+.htm', ))),

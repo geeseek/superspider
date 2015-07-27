@@ -21,7 +21,9 @@
 import re
 import random
 import base64
-#from scrapy import log
+import logging
+
+logger = logging.getLogger(__name__)
 
 class RandomProxy(object):
     def __init__(self, settings):
@@ -40,7 +42,7 @@ class RandomProxy(object):
                 user_pass = ''
 
             self.proxies[parts.group(1) + parts.group(3)] = user_pass
-
+        self.retry_http_codes = set(int(x) for x in settings.getlist('RETRY_HTTP_CODES'))
         fin.close()
 
     @classmethod
@@ -49,25 +51,39 @@ class RandomProxy(object):
 
     def process_request(self, request, spider):
         # Don't overwrite with a random one (server-side state for IP)
-        if 'proxy' in request.meta:
-            return
+        retries = request.meta.get('retry_times', 0) + 1
+        if 'proxy' in request.meta: 
+            if retries < 2:
+                return
+            else:
+                proxy = request.meta['proxy']
+                if proxy in self.proxies.keys():
+                    del self.proxies[proxy]
+                    logger.debug("del proxy %(proxy)s", {'proxy':request.meta['proxy']})
 
         proxy_address = random.choice(self.proxies.keys())
         proxy_user_pass = self.proxies[proxy_address]
 
         request.meta['proxy'] = proxy_address
+        logger.debug("choose proxy %(proxy)s for %(request)s", {'proxy': request.meta['proxy'], 'request':request})
         if proxy_user_pass:
             basic_auth = 'Basic ' + base64.encodestring(proxy_user_pass)
             request.headers['Proxy-Authorization'] = basic_auth
 
     def process_exception(self, request, exception, spider):
-        proxy = request.meta['proxy']
-        #log.msg('Removing failed proxy <%s>, %d proxies left' % (
-        #            proxy, len(self.proxies)))
         try:
-            if proxy in self.proxies.keys():
-                del self.proxies[proxy]
-                print "length of proxy list %" % len(self.proxies)
+            if 'proxy' in request.meta: 
+                proxy = request.meta['proxy']
+                if proxy in self.proxies.keys():
+                    del self.proxies[proxy]
         except ValueError:
             pass
         pass
+
+    def process_response(self, request, response, spider):
+        if response.status in self.retry_http_codes:
+            proxy = request.meta['proxy']
+            if proxy in self.proxies.keys():
+                del self.proxies[proxy]
+                logger.debug("del proxy %(proxy)s from proxy list", {'proxy': request.meta['proxy']})
+        return response

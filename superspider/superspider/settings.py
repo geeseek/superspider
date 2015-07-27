@@ -29,7 +29,7 @@ CONCURRENT_REQUESTS = 100
 DOWNLOAD_DELAY= 1 
 
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 50 
+CONCURRENT_REQUESTS_PER_DOMAIN = 100 
 #CONCURRENT_REQUESTS_PER_IP=16
 
 # Disable cookies (enabled by default)
@@ -55,12 +55,12 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 50
 #DOWNLOADER_MIDDLEWARES = {
 #    'superspider.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
-RETRY_TIMES = 2 
-RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
+RETRY_TIMES = 10 
+RETRY_HTTP_CODES = [500, 501, 503, 504, 400, 403, 404, 408]
 DOWNLOADER_MIDDLEWARES = {
-    'superspider.randomproxy.RandomProxy': 100,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 120
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 500, 
+    'superspider.randomproxy.RandomProxy': 740,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 750 
 }
 
 # Proxy list containing entries like
